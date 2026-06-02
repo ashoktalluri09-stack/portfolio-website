@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ashok Talluri | Operations Professional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0D0D0D;
+      --charcoal-dark: #111111;
+      --charcoal: #1A1A1A;
+      --charcoal-mid: #2E2E2E;
+      --silver: #3A3A3A;
+      --text-light: #C8C8C8;
+      --text-muted: #888888;
+      --biscuit: #F5F0E8;
+      --white: #FFFFFF;
+      --copper: #B87333;
+      --copper-light: #D4954A;
+      --copper-glow: rgba(184, 115, 51, 0.3);
+      --border: var(--silver);
+      --transition: 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behaviour: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--black);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      width: 100%;
+      background: var(--black);
+      border-bottom: 1px solid var(--silver);
+      transition: background var(--transition), box-shadow var(--transition), border-bottom var(--transition);
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      color: var(--biscuit);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-link {
+      color: var(--text-light);
+      font-weight: 600;
+      font-size: 0.95rem;
+      position: relative;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      color: var(--copper);
+    }
+
+    .header-scrolled {
+      background: var(--black);
+      border-bottom: 1px solid var(--silver);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    .header-scrolled .nav-brand {
+      color: var(--biscuit);
+    }
+
+    .header-scrolled .nav-link,
+    .header-scrolled .mobile-toggle {
+      color: var(--text-light);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      padding: 18px 24px 24px;
+      background: var(--black);
+      position: absolute;
+      left: 0;
+      top: 100%;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu .nav-link {
+      color: var(--biscuit);
+    }
+
+    .mobile-menu .nav-link:hover {
+      color: var(--copper);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 80px 24px 60px;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 35%),
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.04), transparent 28%),
+        var(--black);
+      position: relative;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 70%),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 40px);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+    }
+
+    .hero-title {
+      margin: 0 0 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 3.4vw, 4rem);
+      line-height: 0.95;
+      font-weight: 700;
+      color: var(--biscuit);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s ease forwards;
+      animation-delay: 0.1s;
+    }
+
+    .hero-subtitle {
+      margin: 0 0 18px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--copper);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s ease forwards;
+      animation-delay: 0.3s;
+    }
+
+    .hero-tagline {
+      margin: 0 0 28px;
+      font-size: 1rem;
+      color: var(--text-light);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s ease forwards;
+      animation-delay: 0.7s;
+    }
+
+    .button,
+    .button-secondary,
+    .submit-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      padding: 14px 36px;
+      cursor: pointer;
+      transition: color 0.4s ease, transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      white-space: nowrap;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .button::before,
+    .submit-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--copper);
+      transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: -1;
+    }
+
+    .button {
+      background: transparent;
+      border: 2px solid var(--copper);
+      color: var(--copper);
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--biscuit);
+      font-weight: 600;
+    }
+
+    .button:hover,
+    .submit-button:hover {
+      transform: translateY(-1px);
+      color: var(--black);
+      box-shadow: 0 8px 25px rgba(184, 115, 51, 0.4);
+    }
+
+    .button:hover::before,
+    .submit-button:hover::before {
+      left: 0;
+    }
+
+    .button-secondary:hover {
+      border-color: rgba(184, 115, 51, 0.6);
+      background: rgba(184, 115, 51, 0.08);
+      color: var(--copper);
+      box-shadow: 0 8px 25px rgba(184, 115, 51, 0.15);
+    }
+
+    .button:active,
+    .button-secondary:active,
+    .submit-button:active {
+      transform: scale(0.98);
+    }
+
+    .hero-note {
+      font-size: 0.95rem;
+      opacity: 0.75;
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s ease forwards;
+      animation-delay: 0.9s;
+    }
+
+    section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      padding: 80px 24px;
+    }
+
+    section:nth-of-type(odd) {
+      background: var(--charcoal-dark);
+    }
+
+    section:nth-of-type(even) {
+      background: var(--charcoal);
+    }
+
+    #contact {
+      background: var(--black);
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 40px;
+    }
+
+    .section-label {
+      margin: 0 0 14px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 2.8vw, 3.2rem);
+      color: var(--biscuit);
+      letter-spacing: -0.03em;
+    }
+
+    .section-line {
+      width: 60px;
+      height: 3px;
+      background: var(--copper);
+      border: none;
+      margin: 0;
+    }
+
+    .about-grid,
+    .education-grid,
+    .contact-grid,
+    .projects-grid,
+    .achievements-grid {
+      display: grid;
+      gap: 32px;
+    }
+
+    .about-grid {
+      grid-template-columns: 1.4fr 1fr;
+      align-items: start;
+    }
+
+    .about-copy h3,
+    .skills-category-title,
+    .contact-info h3,
+    .education-entry-title {
+      margin: 0 0 16px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--biscuit);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .about-copy p {
+      margin: 0 0 22px;
+      color: var(--text-light);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(184, 115, 51, 0.5);
+      box-shadow: 0 8px 40px rgba(184, 115, 51, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-number {
+      margin: 0 0 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--copper);
+      line-height: 1;
+    }
+
+    .stat-label {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .experience-section {
+      background: var(--charcoal-dark);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 13px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--copper);
+    }
+
+    .timeline-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 28px 28px 28px 34px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      margin-bottom: 28px;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(184, 115, 51, 0.5);
+      box-shadow: 0 8px 40px rgba(184, 115, 51, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .timeline-card::before {
+      content: '';
+      position: absolute;
+      left: -25px;
+      top: 34px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--copper);
+      border: 3px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 0 8px rgba(184, 115, 51, 0.6);
+    }
+
+    .timeline-role {
+      margin: 0 0 10px;
+      color: var(--copper);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+    }
+
+    .timeline-company {
+      margin: 0 0 12px;
+      color: var(--biscuit);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .timeline-dates {
+      margin: 0 0 18px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .timeline-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--text-light);
+      list-style-type: disc;
+      line-height: 1.8;
+    }
+
+    .timeline-card ul li {
+      margin-bottom: 12px;
+    }
+
+    .skills-section {
+      background: var(--charcoal);
+    }
+
+    .skills-category {
+      display: grid;
+      gap: 16px;
+    }
+
+    .skills-category-title {
+      text-transform: none;
+      font-variant: small-caps;
+    }
+
+    .skill-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill-badge {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--silver);
+      border-radius: 999px;
+      padding: 8px 16px;
+      color: var(--text-light);
+      font-size: 0.875rem;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+
+    .skill-badge:hover {
+      background: var(--copper);
+      color: var(--black);
+      border-color: var(--copper);
+    }
+
+    .education-section {
+      background: var(--charcoal-dark);
+    }
+
+    .education-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .education-list,
+    .certification-list {
+      display: grid;
+      gap: 20px;
+    }
+
+    .education-card,
+    .cert-card,
+    .project-card,
+    .achievement-card,
+    .contact-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .education-entry {
+      display: grid;
+      gap: 14px;
+      padding: 22px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .education-entry-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .education-logo {
+      width: 46px;
+      height: 46px;
+      background: var(--biscuit);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: var(--black);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .education-entry-title {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--biscuit);
+    }
+
+    .education-entry-institution {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .education-entry-dates,
+    .cert-meta,
+    .project-meta {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .education-description,
+    .project-description,
+    .achievement-description,
+    .contact-copy {
+      margin: 0;
+      color: var(--text-light);
+      font-size: 1rem;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      background: var(--copper-light);
+      color: var(--black);
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 8px 14px;
+      width: fit-content;
+    }
+
+    .cert-card {
+      border-left: 4px solid var(--copper);
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+
+    .cert-card:hover {
+      border-color: var(--copper-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 40px rgba(184, 115, 51, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .cert-title {
+      margin: 0 0 8px;
+      color: var(--text-light);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .project-card {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .project-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(184, 115, 51, 0.5);
+      box-shadow: 0 8px 40px rgba(184, 115, 51, 0.15);
+    }
+
+    .project-title {
+      margin: 0 0 10px;
+      color: var(--biscuit);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+    }
+
+    .project-meta {
+      margin-bottom: 14px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tag-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--silver);
+      border-radius: 999px;
+      padding: 8px 14px;
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
+
+    .achievements-section {
+      background: var(--charcoal-dark);
+    }
+
+    .achievements-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .achievement-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .achievement-icon {
+      font-size: 3.5rem;
+      color: rgba(184, 115, 51, 0.18);
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      pointer-events: none;
+    }
+
+    .achievement-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .achievement-title {
+      margin: 0 0 12px;
+      color: var(--biscuit);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+    }
+
+    .achievement-date {
+      margin: 0 0 14px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-section {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      gap: 32px;
+    }
+
+    .contact-info {
+      display: grid;
+      gap: 24px;
+    }
+
+    .contact-info h3 {
+      margin: 0;
+      color: var(--copper);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .contact-copy {
+      margin: 0;
+      opacity: 0.85;
+      color: var(--text-light);
+    }
+
+    .contact-links {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      color: var(--biscuit);
+      transition: color var(--transition);
+    }
+
+    .contact-link:hover {
+      color: var(--copper);
+    }
+
+    .contact-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--black);
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 18px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-field label {
+      font-weight: 600;
+      color: var(--biscuit);
+      font-size: 0.95rem;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--silver);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 1rem;
+      color: var(--biscuit);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: var(--copper);
+      box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.15);
+    }
+
+    .submit-button {
+      background: transparent;
+      border: 2px solid var(--copper);
+      color: var(--copper);
+      border-radius: 4px;
+      padding: 14px 36px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      transition: color 0.4s ease, transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .submit-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--copper);
+      transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: -1;
+    }
+
+    .submit-button:hover {
+      color: var(--black);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px rgba(184, 115, 51, 0.4);
+    }
+
+    .submit-button:hover::before {
+      left: 0;
+    }
+
+    .submit-button:active {
+      transform: scale(0.98);
+    }
+
+    .footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 30px 24px;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .footer a {
+      color: var(--copper);
+    }
+
+    .top-button {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--copper);
+      color: var(--black);
+      display: grid;
+      place-items: center;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(184, 115, 51, 0.4);
+      transition: opacity var(--transition), transform var(--transition);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 15;
+    }
+
+    .top-button.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 960px) {
+      .hero-content,
+      .about-grid,
+      .education-grid,
+      .contact-grid,
+      .achievements-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 100px;
+      }
+
+      .hero-image {
+        justify-content: center;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-inner {
+        padding: 16px 20px;
+      }
+
+      .mobile-toggle {
+        display: inline-flex;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .section-inner {
+        padding: 0;
+      }
+
+      section {
+        padding: 60px 18px;
+      }
+
+      .hero {
+        padding: 90px 18px 60px;
+      }
+
+      .hero-image img {
+        width: 140px;
+        height: 140px;
+      }
+
+      .mobile-menu {
+        position: relative;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions a,
+      .hero-actions button {
+        width: 100%;
+      }
+
+      .about-copy p,
+      .education-entry-dates,
+      .project-meta,
+      .achievement-date,
+      .contact-copy {
+        font-size: 1rem;
+      }
+
+      .stats-grid,
+      .achievements-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="pageHeader">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#hero">Ashok Talluri</a>
+      <nav class="desktop-nav">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#experience">Experience</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#education">Education</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#achievements">Achievements</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+      <button class="mobile-toggle" aria-label="Open menu">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#experience">Experience</a>
+      <a class="nav-link" href="#skills">Skills</a>
+      <a class="nav-link" href="#education">Education</a>
+      <a class="nav-link" href="#projects">Projects</a>
+      <a class="nav-link" href="#achievements">Achievements</a>
+      <a class="nav-link" href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <div class="hero-copy">
+          <h1 class="hero-title">ASHOK TALLURI</h1>
+          <p class="hero-subtitle">Operations Manager  ·  Business Operations  ·  Service Delivery Manager</p>
+          <p class="hero-tagline">Operations Professional | Turning Process Into Performance</p>
+          <div class="hero-actions">
+            <a class="button" href="#contact">Get In Touch</a>
+            <a class="button-secondary" href="#experience">View My Work</a>
+          </div>
+          <p class="hero-note">📍 Available Immediately · Anywhere in the UK</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-label">ABOUT</h2>
+          <hr class="section-line">
+        </div>
+        <div class="about-grid">
+          <div class="about-copy">
+            <h3>What I actually do</h3>
+            <p>I do not manage operations from a distance. I have led shifts, controlled 
+stock, resolved complaints, onboarded teams, and kept compliance intact — 
+all at the same time. I bring engineering-level thinking to operational 
+problems, which means I do not just fix what broke. I build what prevents 
+it from breaking again.</p>
+            <p>Promoted to Team Leader within six months at JD Wetherspoon — not because 
+I was next in line, but because the operation ran better when I led it. 
+Before that, four years running a family business in India: signing 
+contracts, managing operators across sites, and keeping heavy plant assets 
+compliant and productive. An MSc in Engineering Management from Coventry 
+University sits behind all of it, giving me the framework to match the 
+instinct.</p>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <p class="stat-number" data-target="6">0+</p>
+              <p class="stat-label">Years of Operations Experience</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-number" data-target="45">0</p>
+              <p class="stat-label">Team Members Led</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-number">Zero</p>
+              <p class="stat-label">Compliance Incidents in 3 Years</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-number" data-target="37">£0K</p>
+              <p class="stat-label">Annual Revenue Managed (India Operations)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="experience-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-label">EXPERIENCE</h2>
+          <hr class="section-line">
+        </div>
+        <div class="timeline">
+          <article class="timeline-card">
+            <h3 class="timeline-role">Team Leader</h3>
+            <p class="timeline-company">JD Wetherspoon · Coventry, UK · Full-time · On-site</p>
+            <p class="timeline-dates">March 2022 – May 2025 · 3 years 3 months</p>
+            <ul>
+              <li>Accelerated to Team Leader within 6 months by delivering consistent operational ownership across a multi-department environment, reducing shift escalations through structured daily briefing and handover routines.</li>
+              <li>Recognised as Best Employee within 4 months of joining, reflecting immediate contribution to team performance and operational outcomes across a high-volume hospitality environment.</li>
+              <li>Managed end-to-end stock control, inventory reporting, and cellar operations using Aztec and Microsoft Excel — maintaining zero-variance records and preventing stock shortfalls across a 3-year period.</li>
+              <li>Resolved customer complaints and led shift performance reviews for a team of 45+, sustaining high satisfaction scores with zero formal complaints escalated during the entire tenure.</li>
+              <li>Ensured full compliance with Health and Safety, food hygiene, and licensing regulations across all departments, achieving zero compliance incidents over 3 years of operational responsibility.</li>
+            </ul>
+          </article>
+          <article class="timeline-card">
+            <h3 class="timeline-role">Business Operations Coordinator</h3>
+            <p class="timeline-company">Alekhya Industries · India · Self-Employed · On-site</p>
+            <p class="timeline-dates">June 2018 – January 2022 · 3 years 8 months</p>
+            <ul>
+              <li>Directed plant and machinery hire operations across 9 client contracts with major construction firms including L&T and Indian Railways, sustaining full utilisation of both heavy plant assets throughout.</li>
+              <li>Secured hire contracts through industry networks and direct negotiation with client procurement teams, generating annual hire revenue of approximately £37,000.</li>
+              <li>Introduced a structured invoicing and credit control process, enforcing 40-day payment terms and achieving full collection within 51 days across all client accounts.</li>
+              <li>Scheduled and supervised 4 plant operators and support crew across concurrent sites, ensuring all contractual obligations and on-site performance standards were consistently met.</li>
+              <li>Implemented a preventive maintenance programme for both plant assets with 3 external providers, achieving zero unplanned downtime and zero compliance failures over 4 years.</li>
+            </ul>
+          </article>
+          <article class="timeline-card">
+            <h3 class="timeline-role">Student Ambassador &amp; Chief Coordinator</h3>
+            <p class="timeline-company">AWAAZ Literary &amp; Cultural Club (Volunteer) · India</p>
+            <p class="timeline-dates">July 2017 – April 2018</p>
+            <ul>
+              <li>Led a 170-member student organisation across 3 consecutive years as Chief Coordinator and Student Ambassador, managing a 15-person coordination team and delivering 4 national-level inter-college events annually.</li>
+              <li>Secured external sponsorships and prepared annual budgets submitted to college management, obtaining institutional funding approval by demonstrating measurable value and cost efficiency.</li>
+              <li>Coordinated end-to-end event logistics and resource allocation for simultaneous events, maintaining delivery standards and team performance under operational pressure.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="skills-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-label">SKILLS</h2>
+          <hr class="section-line">
+        </div>
+        <div class="skills-category">
+          <p class="skills-category-title">Operations & Management</p>
+          <div class="skill-badges">
+            <span class="skill-badge">Operational Planning</span>
+            <span class="skill-badge">Workforce Management</span>
+            <span class="skill-badge">Capacity Planning</span>
+            <span class="skill-badge">Service Delivery</span>
+            <span class="skill-badge">Performance Monitoring</span>
+            <span class="skill-badge">Compliance Management</span>
+            <span class="skill-badge">Health &amp; Safety</span>
+            <span class="skill-badge">SOP Development</span>
+            <span class="skill-badge">Risk Management</span>
+            <span class="skill-badge">Stakeholder Management</span>
+          </div>
+        </div>
+        <div class="skills-category">
+          <p class="skills-category-title">Process & Quality</p>
+          <div class="skill-badges">
+            <span class="skill-badge">Six Sigma Green Belt</span>
+            <span class="skill-badge">Business Process Improvement</span>
+            <span class="skill-badge">Value Stream Mapping</span>
+            <span class="skill-badge">Root Cause Analysis</span>
+            <span class="skill-badge">Continuous Improvement</span>
+            <span class="skill-badge">Lean Methodology</span>
+          </div>
+        </div>
+        <div class="skills-category">
+          <p class="skills-category-title">Data & Reporting</p>
+          <div class="skill-badges">
+            <span class="skill-badge">Demand Forecasting</span>
+            <span class="skill-badge">Report Writing</span>
+            <span class="skill-badge">Microsoft Excel</span>
+            <span class="skill-badge">Minitab</span>
+            <span class="skill-badge">Aztec Management System</span>
+            <span class="skill-badge">KPI Monitoring</span>
+          </div>
+        </div>
+        <div class="skills-category">
+          <p class="skills-category-title">Project & Supply Chain</p>
+          <div class="skill-badges">
+            <span class="skill-badge">Project Management</span>
+            <span class="skill-badge">Supply Chain Management</span>
+            <span class="skill-badge">Inventory Management</span>
+            <span class="skill-badge">Budget Monitoring</span>
+            <span class="skill-badge">Resource Allocation</span>
+            <span class="skill-badge">Preventive Maintenance</span>
+          </div>
+        </div>
+        <div class="skills-category">
+          <p class="skills-category-title">People & Leadership</p>
+          <div class="skill-badges">
+            <span class="skill-badge">Team Leadership</span>
+            <span class="skill-badge">People Management</span>
+            <span class="skill-badge">Cross-functional Collaboration</span>
+            <span class="skill-badge">Recruitment & Onboarding</span>
+            <span class="skill-badge">Performance Appraisal</span>
+            <span class="skill-badge">Change Management</span>
+            <span class="skill-badge">Leadership Development</span>
+          </div>
+        </div>
+        <div class="skills-category">
+          <p class="skills-category-title">Tools & Technology</p>
+          <div class="skill-badges">
+            <span class="skill-badge">Microsoft Office Suite</span>
+            <span class="skill-badge">Minitab</span>
+            <span class="skill-badge">AI Prompt Engineering</span>
+            <span class="skill-badge">Industry 4.0</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION & CERTIFICATIONS SECTION -->
+    <section id="education" class="education-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-label">EDUCATION & CERTIFICATIONS</h2>
+          <hr class="section-line">
+        </div>
+        <div class="education-grid">
+          <div class="education-list">
+            <article class="education-entry">
+              <div class="education-entry-head">
+                <div class="education-logo">C</div>
+                <div>
+                  <p class="education-entry-title">MSc Engineering Management</p>
+                  <p class="education-entry-institution">Coventry University, UK</p>
+                </div>
+              </div>
+              <p class="education-entry-dates">January 2022 – January 2023</p>
+              <p class="education-description">Modules: Project Management, Supply Chain Management, Financial Decision 
+Making and Risk Analysis, Global Engineering Strategy, Sustainability, 
+Entrepreneurship and Innovation, Industry 4.0
+Dissertation: Applied time-series forecasting to automotive supply chain 
+data (Hero MotoCorp) to model sales demand volatility during COVID-19.</p>
+            </article>
+            <article class="education-entry">
+              <div class="education-entry-head">
+                <div class="education-logo">E</div>
+                <div>
+                  <p class="education-entry-title">Professional Training: International Trade & Supply Chain</p>
+                  <p class="education-entry-institution">EXIM Titans</p>
+                </div>
+              </div>
+              <p class="badge-pill">In Progress</p>
+              <p class="education-entry-dates">January 2026 – Present</p>
+              <p class="education-description">Pentagon Sales Framework · UK-India Trade Corridors · Export Regulations · 
+Cross-Border Supply Chain Management</p>
+            </article>
+            <article class="education-entry">
+              <div class="education-entry-head">
+                <div class="education-logo">B</div>
+                <div>
+                  <p class="education-entry-title">BTech Mechanical Engineering</p>
+                  <p class="education-entry-institution">Bapatla Engineering College, India</p>
+                </div>
+              </div>
+              <p class="education-entry-dates">July 2014 – April 2018</p>
+              <p class="education-description">Modules: Manufacturing Engineering, Industrial Engineering, Operations 
+Management, Automation Engineering, Robotics</p>
+            </article>
+          </div>
+          <div class="certification-list">
+            <article class="cert-card">
+              <p class="cert-title">Six Sigma: Green Belt</p>
+              <p class="cert-meta">IIBA · Issued May 2024</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-title">Six Sigma Foundations</p>
+              <p class="cert-meta">Project Management Institute · Issued May 2024</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-title">Business Process Improvement</p>
+              <p class="cert-meta">NASBA · Issued May 2024</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-title">Excel: Value Stream Mapping</p>
+              <p class="cert-meta">NASBA · Issued May 2024</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-title">Minitab</p>
+              <p class="cert-meta">NASBA · Issued May 2024</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-title">Prompt Engineering for ChatGPT</p>
+              <p class="cert-meta">Coursera · Issued August 2023</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-title">Certified Course in CAD</p>
+              <p class="cert-meta">CAD Soft Solutions · Issued February 2022</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-title">Diploma in Mechanical CADD</p>
+              <p class="cert-meta">CAD Soft Solutions · Issued December 2021</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="projects-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-label">PROJECTS</h2>
+          <hr class="section-line">
+        </div>
+        <div class="projects-grid">
+          <article class="project-card">
+            <h3 class="project-title">Time Series Demand Forecasting</h3>
+            <p class="project-meta">September 2022 – December 2022 · MSc Engineering Management, Coventry University</p>
+            <p class="project-description">Applied quantitative time-series forecasting techniques to real automotive 
+supply chain data from Hero MotoCorp to model sales demand volatility during 
+COVID-19. Directly applicable to capacity planning and inventory management 
+in operations roles.</p>
+            <ul class="tag-list">
+              <li class="tag-item">Demand Forecasting</li>
+              <li class="tag-item">Supply Chain</li>
+              <li class="tag-item">Data Analysis</li>
+              <li class="tag-item">MSc Dissertation</li>
+            </ul>
+          </article>
+          <article class="project-card">
+            <h3 class="project-title">Sustainable Power Grid Development</h3>
+            <p class="project-meta">June 2022 – August 2022 · MSc Engineering Management, Coventry University</p>
+            <p class="project-description">Designed a decentralised renewable energy trading framework using blockchain 
+technology, aligned with UN Sustainable Development Goal 12. Delivered as a 
+group project under fixed timeline and resource constraints.</p>
+            <ul class="tag-list">
+              <li class="tag-item">Blockchain</li>
+              <li class="tag-item">Sustainability</li>
+              <li class="tag-item">Project Management</li>
+              <li class="tag-item">UN SDG 12</li>
+            </ul>
+          </article>
+          <article class="project-card">
+            <h3 class="project-title">NOx Emission Mitigation Research</h3>
+            <p class="project-meta">June 2017 – April 2018 · BTech Mechanical Engineering</p>
+            <p class="project-description">Investigated the use of biodiesel and cetane enhancers to reduce nitrogen 
+oxide (NOx) emissions in diesel engines, contributing to environmental 
+sustainability research in mechanical engineering.</p>
+            <ul class="tag-list">
+              <li class="tag-item">Mechanical Engineering</li>
+              <li class="tag-item">Environmental Sustainability</li>
+              <li class="tag-item">Research</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS SECTION -->
+    <section id="achievements" class="achievements-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-label">ACHIEVEMENTS</h2>
+          <hr class="section-line">
+        </div>
+        <div class="achievements-grid">
+          <article class="achievement-card">
+            <div class="achievement-icon">🏆</div>
+            <div class="achievement-content">
+              <h3 class="achievement-title">Best Employee — JD Wetherspoon</h3>
+              <p class="achievement-date">July 2022</p>
+              <p class="achievement-description">Awarded within 4 months of joining, based on operational performance 
+and contribution to team outcomes. Promoted to Team Leader within 6 months.</p>
+            </div>
+          </article>
+          <article class="achievement-card">
+            <div class="achievement-icon">★</div>
+            <div class="achievement-content">
+              <h3 class="achievement-title">Best Speaker — Inter-College Mock Parliament</h3>
+              <p class="achievement-date">November 2017</p>
+              <p class="achievement-description">Selected to represent the institution as Speaker before 60+ 
+participants on National Constitution Day of India, recognised for 
+oratory and leadership.</p>
+            </div>
+          </article>
+          <article class="achievement-card">
+            <div class="achievement-icon">★</div>
+            <div class="achievement-content">
+              <h3 class="achievement-title">Institutional Ambassador — KL University</h3>
+              <p class="achievement-date">March 2017</p>
+              <p class="achievement-description">Represented institution at a National Techno-Management Fest, 
+contributing 8 national-level merit recognitions to the college.</p>
+            </div>
+          </article>
+          <article class="achievement-card">
+            <div class="achievement-icon">★</div>
+            <div class="achievement-content">
+              <h3 class="achievement-title">8-Time National Merit Recipient</h3>
+              <p class="achievement-description">Recognised across 8 national-level inter-institutional competitions 
+spanning academic, cultural, and leadership disciplines over the course of 
+undergraduate studies.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-label">GET IN TOUCH</h2>
+          <hr class="section-line">
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Let's talk about your next operations hire.</h3>
+            <p class="contact-copy">Available immediately for Operations Manager, Business Operations, and 
+Service Delivery Manager roles anywhere in the UK. If you are a hiring 
+manager or recruiter and you would like to discuss a role, please get in 
+touch using the form or reach me directly below.</p>
+            <div class="contact-links">
+              <a class="contact-link" href="mailto:ashoktalluri09@gmail.com">✉ ashoktalluri09@gmail.com</a>
+              <a class="contact-link" href="https://linkedin.com/in/ashok-talluri" target="_blank" rel="noreferrer">🔗 linkedin.com/in/ashok-talluri</a>
+            </div>
+          </div>
+          <div class="contact-card">
+            <form id="contactForm" class="contact-form">
+              <div class="form-field">
+                <label for="fullName">Full Name</label>
+                <input id="fullName" name="fullName" type="text" required>
+              </div>
+              <div class="form-field">
+                <label for="emailAddress">Email Address</label>
+                <input id="emailAddress" name="emailAddress" type="email" required>
+              </div>
+              <div class="form-field">
+                <label for="companyName">Company / Organisation</label>
+                <input id="companyName" name="companyName" type="text" required>
+              </div>
+              <div class="form-field">
+                <label for="messageBody">Message</label>
+                <textarea id="messageBody" name="messageBody" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="submit-button">Send Message</button>
+            </form>
+            <div id="thankYouMessage" style="display:none;">
+              <p class="contact-description" style="margin:0; color: var(--black);">Thank you! Your message has been received. I will be in touch shortly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p style="margin:0;">Ashok Talluri</p>
+    <p style="margin:8px 0;"><a href="mailto:ashoktalluri09@gmail.com">ashoktalluri09@gmail.com</a> · <a href="https://linkedin.com/in/ashok-talluri" target="_blank" rel="noreferrer">linkedin.com/in/ashok-talluri</a></p>
+    <p style="margin:0;">Available immediately · Anywhere in the UK</p>
+    <p style="margin:8px 0 0;">© 2026 Ashok Talluri</p>
+  </footer>
+
+  <button class="top-button" id="topButton" aria-label="Back to top">↑</button>
+
+  <script>
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const pageHeader = document.getElementById('pageHeader');
+    const topButton = document.getElementById('topButton');
+    const navLinks = document.querySelectorAll('a.nav-link');
+    const sections = document.querySelectorAll('main section');
+    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+    const contactForm = document.getElementById('contactForm');
+    const thankYouMessage = document.getElementById('thankYouMessage');
+
+    mobileToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    mobileMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        pageHeader.classList.add('header-scrolled');
+      } else {
+        pageHeader.classList.remove('header-scrolled');
+      }
+      if (window.scrollY > 400) {
+        topButton.classList.add('visible');
+      } else {
+        topButton.classList.remove('visible');
+      }
+    });
+
+    topButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    sections.forEach(section => observer.observe(section));
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+
+    document.querySelectorAll('main section').forEach(section => sectionObserver.observe(section));
+
+    function animateCount(element, target) {
+      let current = 0;
+      const duration = 1500;
+      const increment = target / (duration / 30);
+      const prefix = element.textContent.trim().startsWith('£') ? '£' : '';
+      const suffix = element.textContent.trim().endsWith('K') ? 'K' : '';
+      const update = () => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = prefix + Math.round(target) + suffix;
+        } else {
+          element.textContent = prefix + Math.round(current) + suffix;
+          requestAnimationFrame(update);
+        }
+      };
+      update();
+    }
+
+    const statsObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          statNumbers.forEach(number => {
+            const targetValue = parseInt(number.dataset.target, 10);
+            animateCount(number, targetValue);
+          });
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+
+    if (statNumbers.length) {
+      statsObserver.observe(document.querySelector('#about'));
+    }
+
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      contactForm.style.display = 'none';
+      thankYouMessage.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
